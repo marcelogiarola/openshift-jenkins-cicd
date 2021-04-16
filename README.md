@@ -87,15 +87,15 @@ See [this reference](https://github.com/marcelogiarola/jenkins-util-library#util
 
     ```bash
     $ oc new-project <namespace base name>-dev --description '<development environment namespace`s description>' --display-name '<development environment namespace`s display name>'
-    $ oc project <namespace base name>-dev
     $ oc import-image redhat-openjdk-18/openjdk18-openshift --from=registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.8 --confirm -n myproject
 
     $ oc new-project <namespace base name>-hml --description '<homologation environment namespace`s description>' --display-name '<homologation environment namespace`s display name>'
-    $ oc project <namespace base name>-hml
+    $ oc import-image redhat-openjdk-18/openjdk18-openshift --from=registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.8 --confirm -n myproject
+
+    $ oc new-project <namespace base name>-hotfix --description '<hotfix environment namespace`s description>' --display-name '<hotfix environment namespace`s display name>'
     $ oc import-image redhat-openjdk-18/openjdk18-openshift --from=registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.8 --confirm -n myproject
 
     $ oc new-project <namespace base name> --description '<production environment namespace`s description>' --display-name '< environment namespace`s display name>'
-    $ oc project <namespace base name>
     $ oc import-image redhat-openjdk-18/openjdk18-openshift --from=registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.8 --confirm -n myproject
     ```   
 
@@ -115,5 +115,52 @@ See [this reference](https://github.com/marcelogiarola/jenkins-util-library#util
             - Type - **String Parameter**
             - Name - **BUILD_NAME**
             - Default Value - **application name**
+            - Description - Anything
+            - Check **Trim the string**
+        1. **Image Stream**
+            - Type - **String Parameter**
+            - Name - **APP_IMG_STREAM**
+            - Default Value - **image stream name** optionally followed by **:tag** in this case **openjdk18-openshift:latest**
+            - Description - Anything
+            - Check **Trim the string**
+        1. **Is from file?**
+            - Type - **Boolean Parameter**
+            - Name - **IS_FROM_FILE**
+            - Default Value - Build based on an artifact (**checked**) or a directory (**unchecked**)?**
+            - Description - Anything
+        1. **Liveness probe url**
+            - Type - **String Parameter**
+            - Name - **URL_LIVENESS**
+            - Default Value - A url without side effects that must return a 200 status code - **/referee**
+            - Description - Anything
+            - Check **Trim the string**
+        1. **Readiness probe url**
+            - Type - **String Parameter**
+            - Name - **URL_READINESS**
+            - Default Value - A url without side effects that must return a 200 status code - **/referee**
+            - Description - Anything
+            - Check **Trim the string**
+        1. **Project Home Path**
+            - Type - **String Parameter**
+            - Name - **PROJECT_HOME_PATH**
+            - Default Value - Repository internal path to the project - **example**
+            - Description - Anything
+            - Check **Trim the string**
+        1. **Maven profile**
+            - Type - **String Parameter**
+            - Name - **MAVEN_PROFILE**
+            - Default Value - 
+            - Description - Anything
+            - Check **Trim the string**
+        1. **Environment Variables**
+            - Type - **String Parameter**
+            - Name - **TEMPLATE_NAME**
+            - Default Value - O nome do template utilizado na criação da aplicação - **springboot-api**
+            - Description - Anything
+            - Check **Trim the string**
+        1. **Environment Variables**
+            - Type - **String Parameter**
+            - Name - **ENV_VARS**
+            - Default Value - format: [key: value, other_key: other_value]
             - Description - Anything
             - Check **Trim the string**
